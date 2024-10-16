@@ -1,0 +1,25 @@
+string isValid(string s) {
+    unordered_map<char, int> charFreq;
+    for (char c : s) 
+        charFreq[c]++;
+        
+    unordered_map<int, int> countFreq;
+    for (auto item : charFreq) 
+        countFreq[item.second]++;
+        
+    if (countFreq.size() == 1) {
+        return "YES";
+    } else if (countFreq.size() == 2) {
+        auto it = countFreq.begin();
+        int freq1 = it->first; int count1 = it->second;
+        it++;
+        int freq2 = it->first; int count2 = it->second;
+        
+        if ((count1 == 1 && (freq1 - 1 == 0 || freq1 - 1 == freq2)) || 
+            (count2 == 1 && (freq2 - 1 == 0 || freq2 - 1 == freq1)))
+            return "YES";
+        return "NO";
+    } 
+    
+    return "NO";
+}    
